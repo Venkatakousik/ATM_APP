@@ -39,7 +39,7 @@ public class UserLogin {
 		 try {
 			 deposit();
 		 }catch(AccountDefaults e) {
-			 e.printStackTrace();
+			 System.out.println(e.getMessage());
 			 sdeposit();
 		 }
 	 }
@@ -78,7 +78,7 @@ public class UserLogin {
 		 try {
 			 withDraw();
 		 }catch(AccountDefaults e) {
-			 e.printStackTrace();
+			 System.out.println(e.getMessage());
 			 swithDraw();
 		 }
 	 }
@@ -113,14 +113,7 @@ public class UserLogin {
 			}
 	 }
 	 
-	 public void scheck() {
-		 try {
-			 CheakBalance();
-		 }catch(AccountDefaults e) {
-			 e.printStackTrace();
-			 scheck();
-		 }
-	 }
+	 
 	 public void CheakBalance() throws AccountDefaults{
 		 System.out.print(colour.GREEN+"Please enter your account number : "+colour.RESET);
 		 String acc =scan.next();
@@ -147,11 +140,11 @@ public class UserLogin {
 		        try {
 		        	
 		            String input = scan.next(); 
-		            int pass = Integer.parseInt(input); //  throw NumberFormatException
 
 		            if (input.length() != 4) {
 		                throw new NumberFormatException("Password must be exactly 4 digits.");
 		            }
+		            int pass = Integer.parseInt(input); //  throw NumberFormatException
 
 		            if (AdaminLogin.accs[i].getPin() == pass) {
 		                return true;
@@ -172,7 +165,14 @@ public class UserLogin {
 		    return false;
 		}
 
-	 
+	 public void scheck() {
+		 try {
+			 CheakBalance();
+		 }catch(AccountDefaults e) {
+			 System.out.println(e.getMessage());
+			 scheck();
+		 }
+	 }
 	 
 	 public void Transection() {
 		 System.out.print(colour.GREEN+"Enter your Account number : "+colour.RESET);
