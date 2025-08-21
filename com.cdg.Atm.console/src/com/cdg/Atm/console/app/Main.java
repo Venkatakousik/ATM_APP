@@ -1,7 +1,7 @@
 package com.cdg.Atm.console.app;
 import java.util.Scanner;
 public class Main {
-	
+	// Main servers
 	public static Scanner scan = new Scanner(System.in);
 	
     public static void main(String[] args) throws AccountDefaults {
