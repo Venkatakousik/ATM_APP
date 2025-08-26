@@ -1,5 +1,8 @@
 package com.cdg.Atm.console.app;
-public class Account {
+
+import java.io.Serializable;
+
+public class Account implements Serializable{
 	private String username;
 	private String location;
 	private String accnumber;

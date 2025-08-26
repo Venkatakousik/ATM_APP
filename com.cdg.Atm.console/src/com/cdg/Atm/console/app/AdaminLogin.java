@@ -1,6 +1,10 @@
 package com.cdg.Atm.console.app;
-
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
+
 
 public class AdaminLogin {
 	Scanner scan =new Scanner(System.in);
@@ -78,7 +82,7 @@ public class AdaminLogin {
 		System.out.print("\t\t Location  \t\t: ");
 		String loc =scan.next();
 		
-		String accnumber ="SBI"+no_of_accounts++;
+		String accnumber ="SBI"+accountCount;
 		System.out.println("\t\t User Account number is : "+accnumber);
 		System.out.print("\t\t Enter pin for user     : ");
 		int pin =scan.nextInt();
@@ -195,5 +199,36 @@ public class AdaminLogin {
 		System.out.println(colour.RED+" No user Founds "+colour.RESET);
 	}
 	
+	
+	public static void saveAccounts() {
+	    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("accounts.dat"))) {
+	        // Create a new array with only real accounts
+	        Account[] nonNullAccounts = new Account[accountCount];
+	        for (int i = 0; i < accountCount; i++) {
+	            nonNullAccounts[i] = accs[i];
+	        }
+	        
+	        oos.writeObject(nonNullAccounts);
+	        System.out.println(colour.GREEN+"Accounts saved successfully!"+colour.RESET);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	
+	
+	public static void loadAccounts() {
+	    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("accounts.dat"))) {
+	        Account[] loadedAccs = (Account[])ois.readObject();	    
+	        for (int i = 0; i < loadedAccs.length ; i++) {
+	            if (loadedAccs[i] != null) {
+	                accs[accountCount++] = loadedAccs[i];
+	            }
+	        }
+	        System.out.println(colour.GREEN+"Accounts loaded successfully!"+colour.RESET);
+	    } catch (Exception e) {
+	        System.out.println(colour.RED+"No previous accounts found, starting fresh."+colour.RESET);
+	    }
+	}
 	
 }

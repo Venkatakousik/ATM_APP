@@ -5,6 +5,7 @@ public class Main {
 	public static Scanner scan = new Scanner(System.in);
 	
     public static void main(String[] args) throws AccountDefaults {
+    	AdaminLogin.loadAccounts();
     	AdaminLogin admins = new AdaminLogin();
     	UserLogin user =new UserLogin();
     	System.out.println("===================================================================================");
@@ -38,6 +39,7 @@ public class Main {
                     
                 case 3:
                 		// For Exit the program
+                	AdaminLogin.saveAccounts();
                     System.out.println(colour.RED+"Exiting the program... "+colour.RESET);
                     System.exit(0);
                     break;
